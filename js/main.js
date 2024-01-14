@@ -41,7 +41,7 @@ $(document).ready(function () {
 
     function flashSequence() {
         sequenceFlashing = true;
-        $('.level, .simon-buttons').addClass('sequence-running');
+        $('.level, .simon-buttons, .simon-buttons--row button').addClass('sequence-running');
         let button = selectRandomButton();
         gameMemory.push(button);
         currentSequence = [...gameMemory];
@@ -64,7 +64,7 @@ $(document).ready(function () {
                 await new Promise(resolve => setTimeout(resolve, 150));
             }
             sequenceFlashing = false;
-            $('.level,.simon-buttons').removeClass('sequence-running');
+            $('.level, .simon-buttons, .simon-buttons--row button').removeClass('sequence-running');
         })();
     }
 

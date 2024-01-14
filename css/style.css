@@ -16,6 +16,10 @@ body {
 }
 
 button {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  -webkit-user-drag: none;
   cursor: pointer;
 }
 
@@ -110,7 +114,6 @@ button {
   height: 15rem;
   border: 3px solid transparent;
   border-radius: 100% 2rem 2rem 2rem;
-  -webkit-user-drag: none;
   transition: background-color 0.2s linear, border-color 0.2s linear, opacity 0.2s linear;
 }
 .simon-game .simon-buttons button:not(.game-start)[disabled] {
@@ -119,6 +122,9 @@ button {
 }
 .simon-game .simon-buttons button:not(.game-start):hover:not([disabled]) {
   opacity: 0.7;
+}
+.simon-game .simon-buttons button:not(.game-start).sequence-running {
+  cursor: default;
 }
 .simon-game .simon-buttons button:not(.game-start).selected.selected, .simon-game .simon-buttons button:not(.game-start).selected.yellow, .simon-game .simon-buttons button:not(.game-start).selected.blue, .simon-game .simon-buttons button:not(.game-start).selected.green {
   background-color: #fff;
