@@ -4,6 +4,15 @@ $(document).ready(function () {
     let gameOver = true;
     let sequenceFlashing = false;
     let level = 1;
+    let sound1 = new Audio('sound1.mp3');
+    let sound2 = new Audio('sound2.mp3');
+    let sound3 = new Audio('sound3.mp3');
+    let sound4 = new Audio('sound4.mp3');
+
+    function playSound(audioElement) {
+        audioElement.currentTime = 0;
+        audioElement.play();
+    }
 
     $('button.game-start').on('click', function (e) {
         gameOver = false;
@@ -17,10 +26,18 @@ $(document).ready(function () {
 
     $('.simon-buttons--row button').on('click', function (e) {
         if (gameOver || sequenceFlashing) return;
+        $(this).hasClass('red') ? playSound(sound1) : '';
+        $(this).hasClass('blue') ? playSound(sound2) : '';
+        $(this).hasClass('yellow') ? playSound(sound3) : '';
+        $(this).hasClass('green') ? playSound(sound4) : '';
         if ($(this)[0] === currentSequence.shift()) {
             if (currentSequence.length === 0) {
-                levelUp();
-                flashSequence();
+                $('.simon-buttons--row button').attr('disabled', true);
+                setTimeout(() => {
+                    levelUp();
+                    flashSequence();
+                    $('.simon-buttons--row button').attr('disabled', false);
+                }, 1500);
             }
         } else {
             level = 1;
@@ -49,6 +66,10 @@ $(document).ready(function () {
             return new Promise(resolve => {
                 setTimeout(() => {
                     $(button).addClass('selected');
+                    $(button).hasClass('red') ? playSound(sound1) : '';
+                    $(button).hasClass('blue') ? playSound(sound2) : '';
+                    $(button).hasClass('yellow') ? playSound(sound3) : '';
+                    $(button).hasClass('green') ? playSound(sound4) : '';
                     setTimeout(() => {
                         $(button).removeClass('selected');
                         resolve();
