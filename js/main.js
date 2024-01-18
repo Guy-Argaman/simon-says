@@ -9,11 +9,6 @@ $(document).ready(function () {
     let sound3 = new Audio('sound3.mp3');
     let sound4 = new Audio('sound4.mp3');
 
-    function playSound(audioElement) {
-        audioElement.currentTime = 0;
-        audioElement.play();
-    }
-
     $('button.game-start').on('click', function (e) {
         gameOver = false;
         $(this).attr('aria-hidden', true).fadeOut();
@@ -51,11 +46,6 @@ $(document).ready(function () {
         }
     });
 
-    function levelUp() {
-        level++;
-        $('.level span').text(level);
-    }
-
     function flashSequence() {
         sequenceFlashing = true;
         $('.level, .simon-buttons, .simon-buttons--row button').addClass('sequence-running');
@@ -87,6 +77,16 @@ $(document).ready(function () {
             sequenceFlashing = false;
             $('.level, .simon-buttons, .simon-buttons--row button').removeClass('sequence-running');
         })();
+    }
+
+    function levelUp() {
+        level++;
+        $('.level span').text(level);
+    }
+
+    function playSound(audioElement) {
+        audioElement.currentTime = 0;
+        audioElement.play();
     }
 
     function selectRandomButton() {
